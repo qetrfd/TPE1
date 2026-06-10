@@ -50,6 +50,10 @@ a {
   padding-block: clamp(6rem, 10vw, 9rem);
 }
 
+.presentation-section {
+  min-height: 100svh;
+}
+
 .font-display {
   font-family: "Space Grotesk", "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
@@ -328,6 +332,7 @@ a {
   z-index: 3;
   width: 100%;
   height: 100%;
+  will-change: transform;
   object-fit: contain;
   filter: brightness(0.96) contrast(1.08) saturate(0.78) drop-shadow(0 28px 25px rgba(0,0,0,0.85));
   transform: scale(1.03);
@@ -537,9 +542,9 @@ a {
 .about-car-caption span { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; }
 .about-car-caption strong { margin-top: 0.25rem; font-family: "Space Grotesk", sans-serif; font-size: 1rem; }
 
-.timeline-grid > .reveal { height: 100%; }
+.timeline-grid > div { height: 100%; }
 .timeline-grid article { height: 100%; border-top: 2px solid var(--bmw-blue); background: linear-gradient(160deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); }
-.timeline-grid > .reveal:nth-child(3) article { border-top-color: var(--bmw-red); }
+.timeline-grid > div:nth-child(3) article { border-top-color: var(--bmw-red); }
 
 .purpose-section {
   background:
@@ -955,38 +960,14 @@ a {
 .cta-road-center { left: 50%; }
 .cta-road-right { right: 24%; transform: rotate(-12deg); }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1);
-}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-snap-type: y proximity;
+  }
 
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.animate-hero-copy {
-  animation: rise-in 900ms 120ms both cubic-bezier(.2,.7,.2,1);
-}
-
-.animate-hero-visual {
-  animation: fade-in 1200ms 300ms both ease;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes rise-in {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  main > .presentation-section {
+    scroll-snap-align: start;
+  }
 }
 
 @media (max-width: 1023px) {
@@ -1012,17 +993,17 @@ a {
   }
 
   .vehicle-stage {
-    min-height: 31rem;
+    min-height: 26rem;
   }
 
   .hero-i8-wrap {
-    left: -10%;
+    left: -3%;
     top: 22%;
-    width: 120%;
+    width: 106%;
   }
 
   .hero-car-image {
-    transform: scale(1.03);
+    opacity: 0.88;
   }
 
   .hero-model-outline {
@@ -1201,5 +1182,4 @@ a {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
 }

@@ -32,8 +32,8 @@ import { InnovationCard } from './components/InnovationCard'
 import { BenefitCard } from './components/BenefitCard'
 import { TalentProfile } from './components/TalentProfile'
 import { CTA } from './components/CTA'
-import { Reveal } from './components/Reveal'
 import { MStripes } from './components/MStripes'
+import { ScaleIn, SlideIn, SlideUp, StaggerContainer, StaggerItem } from './components/Motion'
 
 const timeline = [
   { title: '1916', description: "BMW's history begins", Icon: History },
@@ -126,29 +126,33 @@ function App() {
       <main>
         <Hero />
 
-        <section id="about" className="about-section section-shell relative overflow-hidden border-t border-white/6">
+        <section id="about" className="about-section presentation-section section-shell relative flex min-h-screen items-center overflow-hidden border-t border-white/6">
           <div className="ambient-orb left-[-10%] top-[10%]" />
           <div className="page-shell relative">
             <div className="grid items-center gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
-              <Reveal>
+              <div>
                 <SectionTitle eyebrow="01 / Who we are" title="Who is BMW Group?" />
-                <p className="mt-7 max-w-xl text-base leading-8 text-slate-400 sm:text-lg">
-                  BMW Group is one of the world's leading premium manufacturers of automobiles and motorcycles, as well as a provider of premium financial and mobility services. Its history goes back to 1916, and today the company continues shaping the future of mobility through innovation, design, engineering and sustainability.
-                </p>
-                <div className="mt-10 flex items-center gap-4 text-sm text-slate-500">
-                  <span className="grid size-9 place-items-center rounded-full border border-white/10 text-blue-300">
-                    <Network size={16} />
-                  </span>
-                  <span>From engineering heritage to connected mobility.</span>
-                </div>
-                <div className="about-facts mt-10 grid grid-cols-3">
-                  <div><strong>1916</strong><span>Our story begins</span></div>
-                  <div><strong>4</strong><span>Premium brands</span></div>
-                  <div><strong>1</strong><span>Shared future</span></div>
-                </div>
-              </Reveal>
+                <SlideUp delay={0.18}>
+                  <p className="mt-7 max-w-xl text-base leading-8 text-slate-400 sm:text-lg">
+                    BMW Group is one of the world's leading premium manufacturers of automobiles and motorcycles, as well as a provider of premium financial and mobility services. Its history goes back to 1916, and today the company continues shaping the future of mobility through innovation, design, engineering and sustainability.
+                  </p>
+                </SlideUp>
+                <SlideUp delay={0.26}>
+                  <div className="mt-10 flex items-center gap-4 text-sm text-slate-500">
+                    <span className="grid size-9 place-items-center rounded-full border border-white/10 text-blue-300">
+                      <Network size={16} />
+                    </span>
+                    <span>From engineering heritage to connected mobility.</span>
+                  </div>
+                  <div className="about-facts mt-10 grid grid-cols-3">
+                    <div><strong>1916</strong><span>Our story begins</span></div>
+                    <div><strong>4</strong><span>Premium brands</span></div>
+                    <div><strong>1</strong><span>Shared future</span></div>
+                  </div>
+                </SlideUp>
+              </div>
 
-              <Reveal>
+              <ScaleIn delay={0.12}>
                 <div className="about-car-stage">
                   <MStripes className="about-m-stripes" />
                   <span className="about-car-kicker">Premium mobility</span>
@@ -163,35 +167,39 @@ function App() {
                     <strong>Built to move forward.</strong>
                   </div>
                 </div>
-              </Reveal>
+              </ScaleIn>
             </div>
 
-            <div className="timeline-grid mt-16 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            <StaggerContainer className="timeline-grid mt-16 grid gap-3 md:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
               {timeline.map((item, index) => (
-                <Reveal key={item.title} delay={index * 80}>
+                <StaggerItem key={item.title}>
                   <TimelineItem {...item} index={index + 1} />
-                </Reveal>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
 
-        <section id="purpose" className="purpose-section section-shell purpose-grid relative overflow-hidden border-y border-white/6 bg-[#070a10]">
+        <section id="purpose" className="purpose-section presentation-section section-shell purpose-grid relative flex min-h-screen items-center overflow-hidden border-y border-white/6 bg-[#070a10]">
           <span className="purpose-red-beam" aria-hidden="true" />
           <div className="page-shell relative">
             <div className="grid items-center gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:gap-16">
-              <Reveal>
+              <div>
                 <SectionTitle eyebrow="02 / Our purpose" title="Driven by purpose." />
-                <blockquote className="font-display text-4xl font-medium leading-[1.1] tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
-                  “We exist to move people, hearts and minds.”
-                </blockquote>
-                <p className="mt-7 max-w-lg text-base leading-8 text-slate-400 sm:text-lg">
-                  BMW Group creates mobility that is more human, intelligent and responsible.
-                </p>
-                <MStripes className="mt-9" />
-              </Reveal>
+                <SlideUp delay={0.16}>
+                  <blockquote className="font-display text-4xl font-medium leading-[1.1] tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">
+                    “We exist to move people, hearts and minds.”
+                  </blockquote>
+                </SlideUp>
+                <SlideUp delay={0.25}>
+                  <p className="mt-7 max-w-lg text-base leading-8 text-slate-400 sm:text-lg">
+                    BMW Group creates mobility that is more human, intelligent and responsible.
+                  </p>
+                  <MStripes className="mt-9" />
+                </SlideUp>
+              </div>
 
-              <Reveal>
+              <SlideIn direction="right" delay={0.12}>
                 <div className="purpose-car-stage">
                   <span className="purpose-ring" />
                   <span className="purpose-word">RESPONSIBLE</span>
@@ -199,31 +207,29 @@ function App() {
                   <div className="purpose-badge purpose-badge-one"><strong>Human</strong><span>Designed around people</span></div>
                   <div className="purpose-badge purpose-badge-two"><strong>Responsible</strong><span>Progress with purpose</span></div>
                 </div>
-              </Reveal>
+              </SlideIn>
             </div>
 
-            <div className="values-grid mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-                {values.map((value, index) => (
-                  <Reveal key={value.title} delay={index * 60}>
+            <StaggerContainer className="values-grid mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6" stagger={0.08}>
+                {values.map((value) => (
+                  <StaggerItem key={value.title}>
                     <ValueCard {...value} />
-                  </Reveal>
+                  </StaggerItem>
                 ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
 
-        <section id="innovation" className="innovation-section section-shell relative overflow-hidden">
+        <section id="innovation" className="innovation-section presentation-section section-shell relative flex min-h-screen items-center overflow-hidden">
           <div className="ambient-orb right-[-12%] top-[24%]" />
           <div className="page-shell relative">
-            <Reveal>
-              <SectionTitle
-                eyebrow="03 / Innovation"
-                title="Where talent builds the future."
-                description="The next era of mobility is being shaped across disciplines, from the battery cell to the digital experience."
-              />
-            </Reveal>
+            <SectionTitle
+              eyebrow="03 / Innovation"
+              title="Where talent builds the future."
+              description="The next era of mobility is being shaped across disciplines, from the battery cell to the digital experience."
+            />
 
-            <Reveal className="mt-12">
+            <ScaleIn className="mt-12" delay={0.12}>
               <div className="innovation-car-stage">
                 <span className="innovation-outline-word">PRECISION</span>
                 <div className="innovation-track">
@@ -234,60 +240,60 @@ function App() {
                 <img src="./assets/bmw-sedan-grey-side.png" alt="Grey BMW performance sedan side profile" />
                 <MStripes className="innovation-m-stripes" />
               </div>
-            </Reveal>
+            </ScaleIn>
 
-            <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <StaggerContainer className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
               {innovations.map((innovation, index) => (
-                <Reveal key={innovation.title} delay={index * 80}>
+                <StaggerItem key={innovation.title}>
                   <InnovationCard {...innovation} number={`0${index + 1}`} />
-                </Reveal>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
 
-        <section id="benefits" className="section-shell border-y border-white/6 bg-[#070a10]">
+        <section id="benefits" className="presentation-section section-shell flex min-h-screen items-center border-y border-white/6 bg-[#070a10]">
           <div className="page-shell">
             <div className="grid gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
-              <Reveal>
+              <SlideIn direction="left">
                 <div className="lg:sticky lg:top-36">
                   <SectionTitle eyebrow="04 / The experience" title="Why join BMW Group?" />
-                  <p className="mt-6 max-w-md text-base leading-8 text-slate-400">
-                    Join a place where ambitious ideas become premium products, and where your work can help redefine how the world moves.
-                  </p>
-                  <div className="mt-9 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
-                    <BriefcaseBusiness size={17} />
-                    Build more than a career
-                  </div>
+                  <SlideUp delay={0.16}>
+                    <p className="mt-6 max-w-md text-base leading-8 text-slate-400">
+                      Join a place where ambitious ideas become premium products, and where your work can help redefine how the world moves.
+                    </p>
+                    <div className="mt-9 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
+                      <BriefcaseBusiness size={17} />
+                      Build more than a career
+                    </div>
+                  </SlideUp>
                   <div className="benefit-car-stage">
                     <span>Precision in every detail</span>
                     <img src="./assets/bmw-m2-front.png" alt="Front view of a white BMW M performance car" />
                   </div>
                 </div>
-              </Reveal>
-              <div className="grid gap-x-10 sm:grid-cols-2">
-                {benefits.map((benefit, index) => (
-                  <Reveal key={benefit.title} delay={(index % 2) * 80}>
+              </SlideIn>
+              <StaggerContainer className="grid gap-x-10 sm:grid-cols-2" stagger={0.09}>
+                {benefits.map((benefit) => (
+                  <StaggerItem key={benefit.title}>
                     <BenefitCard {...benefit} />
-                  </Reveal>
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerContainer>
             </div>
           </div>
         </section>
 
-        <section id="talent" className="section-shell relative">
+        <section id="talent" className="presentation-section section-shell relative flex min-h-screen items-center">
           <div className="page-shell">
-            <Reveal>
-              <SectionTitle
-                eyebrow="05 / Talent profile"
-                title="Who we're looking for."
-                description="A wide range of engineering disciplines working together to build the future of mobility."
-              />
-            </Reveal>
-            <Reveal className="mt-14">
+            <SectionTitle
+              eyebrow="05 / Talent profile"
+              title="Who we're looking for."
+              description="A wide range of engineering disciplines working together to build the future of mobility."
+            />
+            <ScaleIn className="mt-14" delay={0.12}>
               <TalentProfile />
-            </Reveal>
+            </ScaleIn>
           </div>
         </section>
 

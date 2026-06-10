@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const links = [
   { label: 'About', href: '#about' },
@@ -21,7 +22,10 @@ export function Navbar() {
   }, [])
 
   return (
-    <header
+    <motion.header
+      initial={{ opacity: 0, y: -14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${
         scrolled
           ? 'border-white/8 bg-[#05070b]/85 py-3 shadow-2xl shadow-black/20 backdrop-blur-xl'
@@ -82,6 +86,6 @@ export function Navbar() {
           ))}
         </div>
       </div>
-    </header>
+    </motion.header>
   )
 }
